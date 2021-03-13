@@ -16,6 +16,11 @@ To a large extent, Sumerian clausal syntax is morphologically expressed at the v
 	
 ## `scripts/`
 
+- `Synthy.py`
+	takes a CDLI-CoNLL corpus and generates synthetic training data by randomly replacing words that are morphologically equivalent
+	note that the syntactic structure remains untouched. Do not evaluate against data taken as input to Synthy.
+	On royal corpus, about 50% of all words are being replaced.
+
 - `Slotty.py`
 	small script to augment MTAAC morphology annotations to ETCSRI-style morphology annotations: infer slot information (see below)
 	tested for mtaac-morph.feats (manual MTAAC annotations), royal.feats (converted Ur-III subset from ETCSRI) and full.feats (automatic annotation of the MTAAC Ur-III corpus, trained on MTAAC and the royal subcorpus)
