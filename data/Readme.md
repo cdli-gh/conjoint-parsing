@@ -6,13 +6,41 @@ To a large extent, Sumerian clausal syntax is morphologically expressed at the v
 
 - `classical/` 
 	CDLI-CoNLL data, one word per line, 8 tab-separated columns: ID WORD SEGM POS MORPH HEAD EDGE MISC
-
+	- `classical/royal` (tokens: train 7.500, dev 750, test 1.000)
+		royal subcorpus with syntax annotations, mirror of https://github.com/cdli-gh/mtaac_syntax_corpus/tree/master/royal/release
+		train/dev/test split corresponds to [Ur III corpus](https://github.com/cdli-gh/mtaac_cdli_ur3_corpus/blob/master/ur3_corpus_data/corpus_split_20180418-225438.json)
+	- `classical/parallel` (tokens: train 35.000, dev 5.500, test 5.500)
+		parallel subcorpus with projected annotations, mirror of https://github.com/cdli-gh/mtaac_syntax_corpus/tree/master/parallel/consolidated
+		train/dev/test split corresponds to [Ur III corpus](https://github.com/cdli-gh/mtaac_cdli_ur3_corpus/blob/master/ur3_corpus_data/corpus_split_20180418-225438.json)
+	- `classical/royal-synth` (tokens: train 35.000, dev 8.250, test 1.000)
+		synthetic corpus generated from royal corpus, using [Synthy.py](scripts/Synthy.py)
+		test corresponds to `classical/royal`
+		dev corresponds to `classical/royal/dev` and `classical/royal/train`
+		train is generated from `classical/royal/train` and `classical/royal/dev` using Synthy, with replacements from parallel corpus (excl. test) and royal corpus (excl. test)
+		command: `python3 ../scripts/Synthy.py 35000 royal/train/P* royal/dev/P* -support parallel/dev/* parallel/train/* > royal-synth/train.conll`		
+		
 - `expanded/`
 	CDLI-CoNLL data with one morpheme (slot) per line, otherwise following CDLI/MTAAC conventions
 	the morphological head carries the original dependency and POS annotation
 	morphological slots use the slot identifier as POS, depend on the morphological head or its syntactic parent, and use the morphological gloss as dependency.
 	This data is created from classical CDLI-CoNLL using default parameters of `Deppy.py`
 
+## Evaluation routine
+
+- Note that all annotated data was created semi-automatically, using different methods. They do contain errors. The idea of conjoint training over two subcorpora is that the respective errors will balanced out. This is why we need additional manual evaluation.
+- As for quantitative evaluation, please adhere to the following procedure
+	- For any given parser, please train and evaluate parsers in three settings:
+		- train and evaluate on `classical` data sets (syntactic parsing only)
+		- train and evaluate on `expanded` data sets (conjoint syntactic and morphological parsing)
+		- train on `expanded` data sets, remove lines with slot information, update ID/HEAD, evaluate on `classical` data sets (to evaluate conjoint parsing against syntactic baseline)
+	- As for the data sets, please train and evaluate parsers in five different settings:
+		- train on `parallel`, evaluate on `parallel/test` and `royal/test`
+		- train on `royal`, evaluate on `royal/test` and `parallel/test`
+		- train on `royal-synth`, evaluate on `royal-synth/test` and `parallel/test`: Possible that synthetic data improves parsing performance.
+		- train on `royal-synth` and `parallel`, evaluate on `royal/test` and `parallel/test` separately. The difference is that this uses synthetic data to balance training corpus size between royal and parallel.
+		- train on `royal` and `parallel`, evaluate on `royal/test` and `parallel/test` separately. This is to check whether synthetic data hurts or improves performance on the royal corpus, in particular.
+- For every parser, we have to run up 15 (3x5) trainings and 30 (3x10) evaluations. Start with training and evaluation on `expanded` and on conjoint training on `royal+parallel`.
+- As for evaluation metrics, we use Labelled Attachment Score (LAS), Unlabelled Attachment Score (UAS) and Label Score (LS). The focus is on LAS. UAS and LS are only diagnostics to identify sources of errors.
 	
 ## `scripts/`
 
