@@ -1,6 +1,6 @@
-import sys,os,re
+import sys,os,re,timeit
 
-""" Deppy.py: expand MTAAC dependency syntax to morphosyntactic dependencies and vice versa
+""" Deppy.py: expand MTAAC dependency syntax to morphosyntactic dependencies
 
 MTAAC dependency syntax:
 	one word per line, HEAD: syntactic head, DEP: syntactic dependency
@@ -22,23 +22,26 @@ from Slotty import get_slots, get_head, pattern, pos2pattern, enforce_pattern
 def make_projective(sentence,id=0,head=5):
 	changed=True
 	iterations=0
-	while(changed and iterations < len(sentence)*2):
+	start = timeit.default_timer()
+    
+	# terminate by 20 sec timeout
+	while(changed and iterations < len(sentence)*2 and timeit.default_timer()-start<20):
 		changed=False
 		for x in range(len(sentence)-1):
 			for y in range(x,len(sentence)):	# x<y => x[id] < y[id]
 				y2xid=False
 				y2xhead=False
 				if ((sentence[y][head] < sentence[x][id] and sentence[y][id] < sentence[x][head] ) or
-				   (sentence[x][head] < sentence[y][head] and sentence[y][head] < sentence[x][id])):
+				    (sentence[x][head] < sentence[y][head] and sentence[y][head] < sentence[x][id])):
 					sentence[y][head] = sentence[x][id]					
-					#print(sentence[y][id],"=>",sentence[y][head])
+					print(sentence[y][id],"=>",sentence[y][head])
 					y2xid=True
 					changed=True
 				elif (
 					(sentence[x][id] < sentence[y][head] and sentence[y][head]<sentence[x][head] and sentence[x][head]<sentence[y][id]) or
 					(sentence[y][id] < sentence[x][head] and sentence[x][head]<sentence[y][head])):
 					sentence[y][head] = sentence[x][head]
-					# print(sentence[y][id],"=>",sentence[y][head])
+					print(sentence[y][id],"=>",sentence[y][head])
 					changed=True
 					y2xhead=True
 		iterations+=1
