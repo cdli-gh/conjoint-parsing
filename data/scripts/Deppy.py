@@ -34,14 +34,14 @@ def make_projective(sentence,id=0,head=5):
 				if ((sentence[y][head] < sentence[x][id] and sentence[y][id] < sentence[x][head] ) or
 				    (sentence[x][head] < sentence[y][head] and sentence[y][head] < sentence[x][id])):
 					sentence[y][head] = sentence[x][id]					
-					print(sentence[y][id],"=>",sentence[y][head])
+					#print(sentence[y][id],"=>",sentence[y][head])
 					y2xid=True
 					changed=True
 				elif (
 					(sentence[x][id] < sentence[y][head] and sentence[y][head]<sentence[x][head] and sentence[x][head]<sentence[y][id]) or
 					(sentence[y][id] < sentence[x][head] and sentence[x][head]<sentence[y][head])):
 					sentence[y][head] = sentence[x][head]
-					print(sentence[y][id],"=>",sentence[y][head])
+					#print(sentence[y][id],"=>",sentence[y][head])
 					changed=True
 					y2xhead=True
 		iterations+=1
