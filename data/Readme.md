@@ -147,9 +147,11 @@ The approach taken here is to create pseudo-tokens for *all* imaginable slots of
 The original POS tag is then applied to the location of the stem, all "copies" of the target word take the slot name as POS and the value as dependency label. Note that the POS serves to disambiguate morphology and syntactic relations where these take the same form (e.g., ERG for the ergative morpheme and the grammatical relation between argument and verb). The head of all slots is the stem. In a future revision, the head of N4.1, N5.1 etc. may be set to the parent, the head of N5.2 to grant-parent, if these can be reliably identified in the gold data. 
 
 original
+
 	ba-zi	MID.V.3-SG-S		
 	
 expanded	
+
 	1	ba-zi	V1	12	_
 	2	ba-zi	V2	12	_
 	3	ba-zi	V3	12	_
@@ -167,9 +169,11 @@ expanded
 	15	ba-zi	V15	12	_
 
 original
+
 	ba-an-na-zi	MID.3-SG-H.DAT.V.3-SG-S		
 		
 expanded		
+
 	1	ba-an-na-zi	V1	12	_
 	2	ba-an-na-zi	V2	12	_
 	3	ba-an-na-zi	V3	12	_
@@ -193,6 +197,7 @@ original
 	ba-ti 	MID.3-SG-H-A.V.3-SG-P
 
 expanded
+
 	1	szul-e2-du3-du3-e 	PN	32	ERG
 	2	szul-e2-du3-du3-e 	N2	1	_
 	3	szul-e2-du3-du3-e 	N3	1	_
