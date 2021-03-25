@@ -16,14 +16,14 @@ To a large extent, Sumerian clausal syntax is morphologically expressed at the v
 		parallel subcorpus with projected annotations, mirror of https://github.com/cdli-gh/mtaac_syntax_corpus/tree/master/parallel/consolidated
 		
 		train/dev/test split corresponds to [Ur III corpus](https://github.com/cdli-gh/mtaac_cdli_ur3_corpus/blob/master/ur3_corpus_data/corpus_split_20180418-225438.json)
-	- `classical/royal-synth` (tokens: train 35.000, dev 8.250, test 1.000)
+	- `classical/royal-synth` (tokens: train 41.000, dev 8.250, test 1.000)
 		
 		synthetic corpus generated from royal corpus, using [Synthy.py](scripts/Synthy.py)
 		- test corresponds to `classical/royal`
 		- dev corresponds to `classical/royal/dev` and `classical/royal/train`
 		- train is generated from `classical/royal/train` and `classical/royal/dev` using Synthy, with replacements from parallel corpus (excl. test) and royal corpus (excl. test)
 		
-		command: `python3 ../scripts/Synthy.py 35000 royal/train/P* royal/dev/P* -support parallel/dev/* parallel/train/* > royal-synth/train.conll`		
+		generated in `classical/` using the command: `python3 ../scripts/Synthy.py 35000 royal/train.conll royal/dev.conll -support parallel/dev.conll parallel/train.conll > royal-synth/train.conll`		
 		
 - `expanded/`
 	
@@ -77,7 +77,8 @@ To a large extent, Sumerian clausal syntax is morphologically expressed at the v
 
 - `Heady.py`
 
-	small script to reduce expanded CDLI-CoNLL files (as produced by Deppy.py) 
+	small script to reduce expanded CDLI-CoNLL files (as produced by Deppy.py) to syntax annotations only
+	(this reverts Deppy.py)
 	
 ## Sumerian slot grammar
 

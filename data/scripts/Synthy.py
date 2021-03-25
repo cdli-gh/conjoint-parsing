@@ -148,7 +148,7 @@ while(outsize<args.size):
 					line=line.rstrip()
 					if re.match(r"^[0-9]",line):						
 						line=line.split("\t")
-						if line[1]=="1":
+						if line[0]=="1":
 							rephrase_sentence(pos2morph2edge2hword2cpos2cedge2form2freq,sentence)
 							outsize+=len(sentence)
 							sentence=[]
