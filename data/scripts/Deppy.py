@@ -161,7 +161,7 @@ def expand_cdli_conll(sentence, return_empty_slots=True, perlocate=True):
 			if re.match(r"^N[3-6]\.[0-9].*", sentence[x][3]):
 				steps_up+=int(re.sub(r".*\.","",sentence[x][3]))
 			y=sentence[x][5]-1
-			if y>=0 and sentence[y][6]=="appos" and re.match(r"^N[5-6].*",sentence[x][3]):
+			if y>=0 and y < len(sentence) and len(sentence[y])>6 and sentence[y][6]=="appos" and re.match(r"^N[5-6].*",sentence[x][3]):
 				steps_up+=1
 			#print("perlocate",x,steps_up,y,sentence[y][3],pos2pattern[sentence[y][3]])				
 			if(steps_up>0):
@@ -169,7 +169,7 @@ def expand_cdli_conll(sentence, return_empty_slots=True, perlocate=True):
 				#print("perlocate",x,steps_up,y,sentence[y][3],pos2pattern[sentence[y][3]])
 				starttime = timeit.default_timer()
 				breaktime = 2 # in seconds
-				while steps_up >= 0 and y >= 0 and sentence[y][3] in pos2pattern and pos2pattern[sentence[y][3]].startswith("N") and sentence[y][5]>0 and timeit.default_timer()-starttime > breaktime:
+				while steps_up >= 0 and y >= 0 and y < len(sentence) and len(sentence[y])>6 and sentence[y][3] in pos2pattern and pos2pattern[sentence[y][3]].startswith("N") and sentence[y][5]>0 and timeit.default_timer()-starttime > breaktime:
 					#print("perlocate",x,steps_up,y,sentence[y][3],pos2pattern[sentence[y][3]])				
 					if(not sentence[y][6]=="appos"):
 						steps_up = steps_up-1
