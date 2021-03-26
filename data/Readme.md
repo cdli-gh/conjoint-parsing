@@ -25,6 +25,12 @@ To a large extent, Sumerian clausal syntax is morphologically expressed at the v
 		
 		generated in `classical/` using the command: `python3 ../scripts/Synthy.py 35000 royal/train.conll royal/dev.conll -support parallel/dev.conll parallel/train.conll > royal-synth/train.conll`		
 		
+		In the synthetic training corpus, 50% of all tokens (20.424/41.022) have been replaced with randomly selected tokens that are either 
+		- morphological complex and identical in their morphological annotation (12.057) or 
+		- identical in morphology and dependency, having a parent with the same head word and the first child identical in POS and dependency (8.367)
+		
+		Note that the original form was given as replacement option, but only if a different word was chosen, this was marked as replacement.
+		
 - `expanded/`
 	
 	CDLI-CoNLL data with one morpheme (slot) per line, otherwise following CDLI/MTAAC conventions
@@ -237,4 +243,14 @@ expanded
 	
 On this basis, then, a conventional syntactic parser can be trained, taking WORD and POS columns as input, and predicting HEAD and DEP columns. Its output is, however, to be simplified prior to evaluation in that the "dependency labels" of morphemes are aggregated into a single, .-separated gloss and indexing is to be updated. Evaluation should be conducted over morphological parsing (aggregated), unlabelled dependencies (aggregated) and labelled dependencies (aggregated) separately and compared with plain dependency parsing (without expansion, without morphological features, same parser) and lookup-based morphological glossing (https://github.com/cdli-gh/glosser).
 
-Future refinements may include using the correct attachment of nominal case (to parents, grant-parents, etc.) and more sophisticated ways for morphological segmentation.
+## Known issues
+
+* Future refinements may include using the correct attachment of nominal case (to parents, grant-parents, etc.) and more sophisticated ways for morphological segmentation. At the moment, this is done heuristically in `Deppy.py` to the morphological head, its syntactic head, etc., but we do not check whether grammatical features (of gloss annotation) and dependency of the parent node correlate. Normally, we would expect that a `DAT-H` morpheme depends on an NP with the dependency `DAT`, etc. In Sumerian, only the innermost case (can) modify the morphological head (slot `N5`), the outer cases (slot `N5.1`, `N5.2`) would depend on the parent or their parent. Note that in case of appositions, the slot `N5` may be used for the case of the parent rather than the morphological head, etc.
+
+* Training and test data was created using an array of semiautomated methods with different typical errors (see https://github.com/cdli-gh/mtaac_syntax_corpus for sources, methods and updates). Manual revision is strongly encouraged. However, we expect any parser trained on such heterogeneous data to generalize over source-specific errors and to produce a relatively trustable result.
+
+* 
+
+## Future work
+
+* Parsing from text: Slot expansion requires part-of-speech tagging. To annotate unseen text, consider using the CRF POS/NER taggers from https://github.com/cdli-gh/Sumerian-Translation-Pipeline. For text from the Ur-III period, data annotated in this way can be found under https://github.com/cdli-gh/mtaac_cdli_ur3_corpus/tree/master/ur3_corpus_data/annotated/pos.
