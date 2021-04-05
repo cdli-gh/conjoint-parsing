@@ -54,17 +54,18 @@ The mapping files are `pos2UD.tsv` and `deps2UD.tsv`.
 
 - Note that all annotated data was created semi-automatically, using different methods. They do contain errors. The idea of conjoint training over two subcorpora is that the respective errors will balanced out. This is why we need additional manual evaluation.
 - As for quantitative evaluation, please adhere to the following procedure
-	- For any given parser, please train and evaluate parsers in three settings:
+	- For any given parser, please train and evaluate parsers in four settings:
 		- train and evaluate on `classical` data sets (syntactic parsing only)
 		- train and evaluate on `expanded` data sets (conjoint syntactic and morphological parsing)
 		- train on `expanded` data sets, remove lines with slot information, update ID/HEAD, evaluate on `classical` data sets (to evaluate conjoint parsing against syntactic baseline)
+		- train and evaluate on UD-mapped `classical`data sets (syntactic parsing only, to compare with state of the art parsers that are restricted to UD tags) 
 	- As for the data sets, please train and evaluate parsers in five different settings:
 		- train on `parallel`, evaluate on `parallel/test` and `royal/test`
 		- train on `royal`, evaluate on `royal/test` and `parallel/test`
 		- train on `royal-synth`, evaluate on `royal-synth/test` and `parallel/test`: Possible that synthetic data improves parsing performance.
 		- train on `royal-synth` and `parallel`, evaluate on `royal/test` and `parallel/test` separately. The difference is that this uses synthetic data to balance training corpus size between royal and parallel.
 		- train on `royal` and `parallel`, evaluate on `royal/test` and `parallel/test` separately. This is to check whether synthetic data hurts or improves performance on the royal corpus, in particular.
-- For every parser, we have to run up 15 (3x5) trainings and 30 (3x10) evaluations. Start with/Prioritize training and evaluation on `expanded` and on conjoint training on `royal+parallel`.
+- For every parser, we have to run up to 15 (3x5) trainings and 40 (4x10) evaluations. Start with/Prioritize training and evaluation on `expanded` and on conjoint training on `royal+parallel`.
 - As for evaluation metrics, we use Labelled Attachment Score (LAS), Unlabelled Attachment Score (UAS) and Label Score (LS). The focus is on LAS. UAS and LS are only diagnostics to identify sources of errors. When reporting Labelled Attachment Score, please report it globally, for every part of speech individually and for every predicted dependency individually.
 
 ## `scripts/`
