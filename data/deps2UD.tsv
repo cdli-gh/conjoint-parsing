@@ -1,0 +1,51 @@
+# CDLI DEP (EDGE)	UD v.2	comment
+...	dep	this is an error
+...-gar	dep	this is an error
+_	dep	this is a gap
+1(asz)	nummod	this is an error
+1(ban2)	nummod	this is an error
+2(u)	nummod	this is an error
+ABL	nmod	this is only correct in 50% of the cases, otherwise, obl
+ABS	obj	this is only correct in 50% of the cases, otherwise, its nsubj
+acl	acl	
+acl.ADV	advcl	
+ADV	obl	
+amod	amod	
+apos	appos	this is a typo for appos
+appos	appos	
+appos|appos	appos	this is an extraction error for appos
+cc	cc	
+ccomp 	ccomp	
+COM	obl	
+conj	conj	
+DAT	iobj	
+date	obl	
+dep	dep	
+dep|dep	dep	extraction error for dep
+EQU	nmod	
+ERG	nsubj	
+GEN	nmod	
+GEN.ABS	obj	see ABS
+GEN.ERG	nsubj	
+GEN.GEN	nmod	
+GEN.TERM	nmod	this is only correct in 50% of the cases, otherwise, obl
+la2	acl	this is an error
+LOC	obl	this is only correct in 50% of the cases, otherwise, obl
+lugal-a-ni	dep	this is an error
+ma-na	nmod	this is an error
+mwe	flat	mwe was the UD v.1 tag
+nmod	nmod	
+nmod:accord	obl	
+nmod:give	obl	
+nmod:per	nmod	
+nmod:without	nmod	
+nmod|nmod	nmod	extraction error for nmod
+nsubj	nsubj	
+nummod	nummod	
+parataxis	parataxis	
+root	root	
+sze-sag11-ku5	dep	extraction error
+TERM	nmod	this is only correct in 50% of the cases, otherwise, obl
+ud5	nmod	extraction error
+via	obl	
+x	dep	extraction error

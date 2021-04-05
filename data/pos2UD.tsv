@@ -1,0 +1,26 @@
+# CDLI POS	UD v.2 POS	comment
+AJ	ADJ	more correct would be VERB
+AV	ADV	more correct would be VERB
+CC	CCONJ	
+CNJ	CCONJ	
+DET	DET	more correct would be NOUN
+DN	PROPN	
+EN	PROPN	
+FN	PROPN	
+GN	PROPN	
+IP	X	this is one single ETSCRI word and probably an error
+L	X	probably an error in ETSCRI
+MN	PROPN	
+N	NOUN	
+NU	NUM	more correct would be VERB
+N|N	NOUN	extraction error
+ON	PROPN	
+PN	PROPN	
+PN|PN	PROPN	extraction error for PN
+RN	PROPN	
+SN	PROPN	
+TN	PROPN	
+V	VERB	
+V|V	VERB	extraction error for V
+WN	PROPN	
+X	X	

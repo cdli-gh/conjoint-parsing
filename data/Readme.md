@@ -42,6 +42,14 @@ To a large extent, Sumerian clausal syntax is morphologically expressed at the v
 	
 	This data is created from classical CDLI-CoNLL using default parameters of `Deppy.py`
 
+## Original annotation and UD mapping
+
+We provide a heuristic mapping to UD specifications for POS tags and EDGE/DEP annotations. Note that this is not 100% correct, but should be used to training with parsers that restrict their training data to UD corpora (e.g., SpaCy).
+
+Those parsers will work on the classical data only, not on the expanded data. This also means that we need to perform the evaluation over classical data *twice*: Once using CDLI annotations, once using the UD mapping.
+
+The mapping files are `pos2UD.tsv` and `deps2UD.tsv`.
+	
 ## Evaluation routine
 
 - Note that all annotated data was created semi-automatically, using different methods. They do contain errors. The idea of conjoint training over two subcorpora is that the respective errors will balanced out. This is why we need additional manual evaluation.
